@@ -3,7 +3,7 @@ class Pokemon{
 
     constructor(id,name,height,weight,types,nickname = null,favorite=false,powerLevel=1){
 
-        if (!id|!name||!height||!weight){
+        if (!id ||!name|| !height|| !weight){
 
             throw new Error("Invalid attributes to Pokemon")
 
