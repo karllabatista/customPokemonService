@@ -35,4 +35,8 @@ class Pokemon{
  
     }
 
+    setFavoritePokemon(){
+        this.favorite = true;
+    }
+
 }
