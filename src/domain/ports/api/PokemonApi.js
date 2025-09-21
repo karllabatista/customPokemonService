@@ -18,6 +18,14 @@ class PokemonApiPort{
        throw new Error("Method 'listPokemons' must be implemented.");
     }
 
+
+    async fetchPokemonByName(pokemonName){
+
+        throw new Error("Method 'fetchPokemonByName' must be implemented.");
+
+    }
+
+
 }
 
-export default PokemonAPI;
+export default PokemonApiPort;
