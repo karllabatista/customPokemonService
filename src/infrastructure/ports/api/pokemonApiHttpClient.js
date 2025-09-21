@@ -1,21 +1,21 @@
 import PokemonApiPort from "../../../domain/ports/api/PokemonApi.js";
-
+import PokemonError from "../../../domain/errors/PokemonError.js";
 
 class PokemonApiHttpClient extends PokemonApiPort{
 
-    constructor(baseUrl){
+    constructor(baseUrl,fetchFn = fetch){
         super();
         this.baseUrl = baseUrl;
+        this.fetchFn = fetchFn;
     }
 
     async fetchPokemonByName(pokemonName) {
 
         try {
-            const response = await fetch(`${this.baseUrl}/${pokemonName}`);
+            const response = await this.fetchFn(`${this.baseUrl}/${pokemonName}`);
             
             if (!response.ok) {
-                console.error("Pokemon not found");
-                throw new Error("Pokemon not exists in PokeAPI");
+                throw new PokemonError("Pokemon not exists in PokeAPI");
             }
 
             const data = await response.json();
@@ -28,3 +28,4 @@ class PokemonApiHttpClient extends PokemonApiPort{
     }
  
 }
+export { PokemonApiHttpClient};
