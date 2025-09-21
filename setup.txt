@@ -32,3 +32,37 @@ npm install graphql
 
 Apollo Server (mais usado, facilita setup de GraphQL):
 npm install @apollo/server
+
+---------------
+JEST
+
+INSTALAR JEST
+
+npm init -y
+npm install --save-dev jest
+
+
+Depois edite o package.json:
+
+{
+  "name": "pokemon-clean-arch",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0"
+  }
+}
+
+RODANDO OS TESTS
+
+npm test
+
+Saída esperada ✅:
+
+ PASS  src/app/entities/Pokemon.test.js
+  Pokemon Entity
+    ✓ should create a Pokemon with valid attributes (5 ms)
+    ✓ should throw error when missing required attributes
+    ✓ should throw error when no types are provided    
