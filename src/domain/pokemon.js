@@ -35,7 +35,7 @@ class Pokemon{
  
     }
 
-    setFavoritePokemon(){
+    markAsFavorite(){
         this.favorite = true;
     }
 
