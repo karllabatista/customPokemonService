@@ -1,29 +1,6 @@
 
 class Pokemon{
 
-    constructor(id,name,height,weight,types,nickname = null,favorite=false,powerLevel=1){
-
-        if (!id ||!name|| !height|| !weight){
-
-            throw new Error("Invalid attributes to Pokemon")
-
-        }
-
-        if (!Array.isArray(types) || types.length === 0) {
-            throw new Error("Pokemon must have at least one type");
-        }
-
-        this.id = id;
-        this.name = name;
-        this.height=height;
-        this.weight = weight;
-        this.types = types;
-        this.nickname = nickname; //optional
-        this.favorite = favorite; //optional
-        this.powerLevel = powerLevel; //optional
-
-        
-    }
 
     powerLevelUp(){
 
