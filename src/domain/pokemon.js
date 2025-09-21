@@ -13,14 +13,14 @@ class Pokemon{
             throw new Error("Pokemon must have at least one type");
         }
 
-        this.id = id,
-        this.name = name,
-        this.height=height,
-        this.weight = weight,
-        this.types = types,
-        this.nickname = nickname, //optional
-        this.favorite = favorite, //optional
-        this.powerLevel = powerLevel //optional
+        this.id = id;
+        this.name = name;
+        this.height=height;
+        this.weight = weight;
+        this.types = types;
+        this.nickname = nickname; //optional
+        this.favorite = favorite; //optional
+        this.powerLevel = powerLevel; //optional
 
         
     }
