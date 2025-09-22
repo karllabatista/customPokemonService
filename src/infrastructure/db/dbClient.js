@@ -25,8 +25,8 @@ class MongoDBClient{
 
     async connect(){
 
-        if (!this.client.isConnected()){
-            await this.client.connect();
+        if (!this.client.topology?.isConnected()){
+            await this.client.topology?.isConnected()
             console.info("Connected to mongo");
         }else{
             console.info("Already connect to Mongo");
@@ -50,16 +50,16 @@ class MongoDBClient{
 
 };
 
-export {MongoClient}
-async function main(){
+export {MongoDBClient}
+// async function main(){
 
-    dotenv.config();
-    const mongoClient = new MongoClient(process.env.MONGO_URI);
+//     dotenv.config();
+//     const mongoClient = new MongoClient(process.env.MONGO_URI);
 
-    await mongoClient.connect();
-    console.log("✅ Conexão com MongoDB estabelecida!");
-    await mongoClient.close();
+//     await mongoClient.connect();
+//     console.log("✅ Conexão com MongoDB estabelecida!");
+//     await mongoClient.close();
 
-}
+// }
 
-main();
+// main();
