@@ -1,6 +1,20 @@
 
 class Pokemon{
 
+    constructor(nickname,favorite,powerLevel){
+
+        if (!pokemonName||!nickname||!favorite||!powerLevel){
+
+            throw new Error("Invalid attributes to Pokemon")
+
+        }
+
+        this.pokemonName = pokemonName
+        this.nickname = nickname; 
+        this.favorite = favorite; 
+        this.powerLevel = powerLevel; 
+    }
+
 
     powerLevelUp(){
 
@@ -18,4 +32,4 @@ class Pokemon{
 
 }
 
-module.exports = Pokemon;
+export {Pokemon}
