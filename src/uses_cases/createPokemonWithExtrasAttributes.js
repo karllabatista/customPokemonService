@@ -29,25 +29,33 @@ class CreatePokemonWithExtrasAttributesUseCase{
     async execute(inputDTO){
 
 
-        const enrichedPokemon = "";
+        try{
+        
+            // find data about pokemon in PokeAPI
+            const pokemonDataApi = await this.apiPokemon.fetchPokemonByName(inputDTO.pokemonName);
 
-        // find data about pokemon in PokeAPI
-        const pokemonDataApi = await this.apiPokemon.fetchPokemonByName(inputDTO.pokemonName);
-        console.log(pokemonDataApi);
+        
+            //create a customizedPokemon
+            let customizedPokemon = new Pokemon(inputDTO.pokemonName,
+                                            inputDTO.nickname,
+                                            inputDTO.favorite,
+                                            inputDTO.powerLevel        
+                                );
 
-        //create a customizedPokemon
-        customizedPokemon = new Pokemon(inputDTO.pokemonName,
-                                        inputDTO.nickname,
-                                        inputDTO.favorite,
-                                        inputDTO.powerLevel        
-                            );
-
-        //save this pokemon
-        const pokemonDB = this.repositoryPokemon.save(customizedPokemon);
-
-
-        //merge data to enrichedPokemon 
-        //...............
+        
+            //save this pokemon
+            const pokemonDB = await this.repositoryPokemon.save(customizedPokemon);
+            
+            //merge data to enrichedPokemon 
+            
+            const enrichedPokemon = {...pokemonDataApi,...pokemonDB}
+            //console.log(enrichedPokemon);
+            return enrichedPokemon
+        } catch (error){
+            console.error("[CreatePokemonWithExtrasAttributesUseCase] Failed  create a customized Pokemon");
+            throw error; // se quiser propagar o erro para cima
+        }                        
+    
 
     }
 }
