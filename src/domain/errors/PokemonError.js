@@ -5,4 +5,4 @@ class PokemonError extends Error{
     }
 }
 
-export default PokemonError;
+export {PokemonError};
