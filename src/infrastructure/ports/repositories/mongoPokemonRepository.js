@@ -1,4 +1,5 @@
-import { PokemonRepositoryError } from "../../../domain/errors/PokemonRepositoryError";
+import { PokemonRepository } from "../../../domain/ports/repositories/PokemonRepository.js";
+import { PokemonRepositoryError } from "../../../domain/errors/PokemonRepositoryError.js";
 import { Collection } from "mongodb";
 
 class MongoPokemonRepository extends PokemonRepository{
