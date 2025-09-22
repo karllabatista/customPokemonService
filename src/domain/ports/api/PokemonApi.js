@@ -27,5 +27,4 @@ class PokemonApiPort{
 
 
 }
-
-export default PokemonApiPort;
+export {PokemonApiPort};
