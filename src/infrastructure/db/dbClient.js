@@ -1,5 +1,5 @@
 import { MongoClient } from "mongodb";
-import dotenv from "dotenv";
+
 
 class MongoDBClient{
     /**
@@ -44,6 +44,7 @@ class MongoDBClient{
 
     async disconnect(){
         // TODO MANAGE OPEN/CLOSE CONNECT
+        console.info("disconnect to mongo")
         await this.client.close();
     }
 
@@ -57,7 +58,7 @@ export {MongoDBClient}
 //     const mongoClient = new MongoClient(process.env.MONGO_URI);
 
 //     await mongoClient.connect();
-//     console.log("✅ Conexão com MongoDB estabelecida!");
+//   
 //     await mongoClient.close();
 
 // }
