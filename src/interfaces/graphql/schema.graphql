@@ -1,0 +1,27 @@
+type Pokemon {
+id: ID!
+name: String!
+height: Int
+weight: Int
+types: [String!]!
+# Atributos extras (MongoDB)
+nickname: String
+favorite: Boolean
+powerLevel: Int
+}
+
+input PokemonAttributesInput {
+pokemonName: String!
+nickname: String
+favorite: Boolean
+powerLevel: Int
+}
+
+type Query{
+
+}
+
+type Mutation{
+    
+createPokemonAttributes(input: PokemonAttributesInput!): Pokemon!
+}
