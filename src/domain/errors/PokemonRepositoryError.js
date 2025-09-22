@@ -7,4 +7,4 @@ class PokemonRepositoryError extends Error{
     }
 }
 
-export {"PokemonRepositoryError"}
+export {PokemonRepositoryError}
