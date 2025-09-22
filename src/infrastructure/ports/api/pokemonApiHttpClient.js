@@ -1,5 +1,5 @@
-import PokemonApiPort from "../../../domain/ports/api/PokemonApi.js";
-import PokemonError from "../../../domain/errors/PokemonError.js";
+import {PokemonApiPort} from "../../../domain/ports/api/PokemonApi.js";
+import {PokemonError} from "../../../domain/errors/PokemonError.js";
 
 class PokemonApiHttpClient extends PokemonApiPort{
 
@@ -28,4 +28,4 @@ class PokemonApiHttpClient extends PokemonApiPort{
     }
  
 }
-export { PokemonApiHttpClient};
+export { PokemonApiHttpClient };
