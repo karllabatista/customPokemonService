@@ -22,8 +22,7 @@ class PokemonApiHttpClient extends PokemonApiPort{
             return data;
 
         } catch (error) {
-            console.error("Error to find Pokemon:", error.message);
-            throw error;
+            console.error("[PokemonApiHttpClient] Error to find Pokemon:", error.message);
         }
     }
  
