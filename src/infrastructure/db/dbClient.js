@@ -37,7 +37,7 @@ class MongoDBClient{
     }
 
     useDb(){
-        const pokemonDb = client.db("pokemonsDB");
+        const pokemonDb = this.client.db("pokemonsDB");
 
         return pokemonDb
     }
