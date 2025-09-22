@@ -36,10 +36,10 @@ class MongoDBClient{
     
     }
 
-    getCollection(){
-        const pokemonCollection = client.db().collection("pokemons");
+    useDb(){
+        const pokemonDb = client.db("pokemonsDB");
 
-        return pokemonCollection
+        return pokemonDb
     }
 
     async disconnect(){
