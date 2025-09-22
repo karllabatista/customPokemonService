@@ -5,12 +5,13 @@ import { Collection } from "mongodb";
 class MongoPokemonRepository extends PokemonRepository{
     /**
      * Implementation of MongoDB Client as Pokemon Repository
-     * @param {Collection} collection - Pokemons collection
+     * @param {Db} db - MongoDB database instance
+     * @param {string} collectionName - Collection name
      */
 
-    constructor(collection){
+    constructor(db,collectionName = "pokemons"){
         super();
-        this.collection = collection;
+        this.collection = db.collection(collectionName);
         
     }
     
@@ -31,7 +32,9 @@ class MongoPokemonRepository extends PokemonRepository{
                 powerLevel: customizedPokemon.powerLevel
             };
 
-            await this.collection.insertOne(pokemonDoc);
+            await this.collection.insertOne(pokemonDoc); // if collection doesn not exists, 
+                                                        //create to first insert
+            
             return pokemonDoc;
             
         }catch(err){
