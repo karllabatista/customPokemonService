@@ -1,7 +1,7 @@
 
 class Pokemon{
 
-    constructor(nickname,favorite,powerLevel){
+    constructor(pokemonName,nickname,favorite,powerLevel){
 
         if (!pokemonName||!nickname||!favorite||!powerLevel){
 
