@@ -3,7 +3,7 @@ import { Pokemon } from "../domain/entities/Pokemon.js";
 import { PokemonApiPort } from "../domain/ports/api/PokemonApi.js";
 import { PokemonRepository } from "../domain/ports/repositories/PokemonRepository.js";
 import { PokemonError } from "../domain/errors/PokemonError.js";
-import { validatorPowerLevel } from "../domain/validators/PokemonValidator.js";
+import { validatorPowerLevel,validatorFavoritePokemons} from "../domain/validators/PokemonValidator.js";
 class CreatePokemonWithExtrasAttributesUseCase{
 
 
@@ -47,10 +47,11 @@ class CreatePokemonWithExtrasAttributesUseCase{
             
             //find if pokemons exists and  check details
 
-            //check pokemon power level
+
             const existing = await this.repositoryPokemon.findByName(customizedPokemon.pokemonName);
 
-
+                        
+            
             let newPowerLevel = null;
             if (existing){
 
@@ -62,25 +63,10 @@ class CreatePokemonWithExtrasAttributesUseCase{
                 customizedPokemon.powerLevel =  newPowerLevel;
             }
 
-
             let totalPokemonsFavorites = await this.repositoryPokemon.countFavorites();
-  
-            if (existing){
-                // exists in bd
-                if( !existing.favorite && customizedPokemon.favorite==true && totalPokemonsFavorites>=3){
-
-                    throw new PokemonError("Already exists three pokemons marked as favorite. Impossible save");
-
-                }
-
-            }else{
-                //new pokemom with favorite equals true but  totalPokemonsFavorites>=3
-
-                if (customizedPokemon.favorite && totalPokemonsFavorites>=3 ){
-                    throw new PokemonError("Already exists three pokemons marked as favorite. Impossible save");
-                }
-            }
-
+            //validate total of favorites pokemons >=3
+            validatorFavoritePokemons(existing,customizedPokemon,totalPokemonsFavorites);  
+            
             //save this pokemon
             const pokemonDB = await this.repositoryPokemon.save(customizedPokemon);
             
