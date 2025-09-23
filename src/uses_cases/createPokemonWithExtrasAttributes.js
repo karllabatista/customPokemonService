@@ -48,7 +48,16 @@ class CreatePokemonWithExtrasAttributesUseCase{
             
             //merge data to enrichedPokemon 
             
-            const enrichedPokemon = {...pokemonDataApi,...pokemonDB}
+           const enrichedPokemon = {
+                name: pokemonDataApi.name,         
+                height: pokemonDataApi.height,       
+                weight: pokemonDataApi.weight,       
+                types: pokemonDataApi.types.map(t => t.type.name), 
+                nickname: pokemonDB.nickname,        
+                favorite: pokemonDB.favorite,        
+                powerLevel: pokemonDB.powerLevel,    
+                id: pokemonDB._id.toString()         
+            };
             //console.log(enrichedPokemon);
             return enrichedPokemon
         } catch (error){
