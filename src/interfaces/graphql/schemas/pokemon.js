@@ -20,7 +20,7 @@ powerLevel: Int
 }
 
 type Query{
-    pokemons(page,limit):[Pokemon!]!
+    pokemons(page:Int,limit:Int):[Pokemon!]!
 
 }
 type Mutation{
