@@ -6,7 +6,12 @@ class PokemonRepository{
     }
 
     async findByName(pokemonName){
-        throw new Error("Method 'save' must be implemented.");
+        throw new Error("Method 'findByName' must be implemented.");
+    }
+
+    async countFavorites(){
+        throw new Error("Method 'countFavorites' must be implemented.");
+    
     }
 }
 
