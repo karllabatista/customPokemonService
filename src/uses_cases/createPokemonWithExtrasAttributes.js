@@ -90,10 +90,32 @@ class CreatePokemonWithExtrasAttributesUseCase{
             //console.log("favorite type:", typeof customizedPokemon.favorite, customizedPokemon.favorite);
 
             // //business rule  favorite >3
-            if (totalPokemonsFavorites >= 3){
+            // if (totalPokemonsFavorites >= 3){
 
-                throw new PokemonError("Already exists three pokemons marked as favorite. Impossible save");
+            //     throw new PokemonError("Already exists three pokemons marked as favorite. Impossible save");
+            // }
+
+            if (existing){
+                // exists in bd
+                if( !existing.favorite && customizedPokemon.favorite==true && totalPokemonsFavorites>=3){
+
+                    throw new PokemonError("Already exists three pokemons marked as favorite. Impossible save");
+
+                }
+
+            }else{
+                //new pokemom with favorite equals true but  totalPokemonsFavorites>=3
+
+                if (customizedPokemon.favorite && totalPokemonsFavorites>=3 ){
+                    throw new PokemonError("Already exists three pokemons marked as favorite. Impossible save");
+                }
             }
+
+
+
+
+
+
                     
             //save this pokemon
             const pokemonDB = await this.repositoryPokemon.save(customizedPokemon);
