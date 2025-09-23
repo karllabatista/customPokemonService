@@ -101,6 +101,7 @@ class CreatePokemonWithExtrasAttributesUseCase{
             //merge data to enrichedPokemon 
             
            const enrichedPokemon = {
+                id: pokemonDataApi.id,
                 name: pokemonDataApi.name,         
                 height: pokemonDataApi.height,       
                 weight: pokemonDataApi.weight,       
@@ -108,7 +109,7 @@ class CreatePokemonWithExtrasAttributesUseCase{
                 nickname: pokemonDB.nickname,        
                 favorite: pokemonDB.favorite,        
                 powerLevel: pokemonDB.powerLevel,    
-                id: pokemonDB._id.toString()         
+                        
             };
          
             return enrichedPokemon
