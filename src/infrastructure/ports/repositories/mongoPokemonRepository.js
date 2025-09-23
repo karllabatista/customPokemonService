@@ -35,21 +35,13 @@ class MongoPokemonRepository extends PokemonRepository{
 
            // await this.collection.insertOne(pokemonDoc);
 
-            // busca o pokemon existente primeiro
-            const existing = await this.collection.findOne({ pokemonName: pokemonDoc.pokemonName });
-            const newPowerLevel = existing ? existing.powerLevel + pokemonDoc.powerLevel : pokemonDoc.powerLevel;
-
-            if (newPowerLevel < 1 || newPowerLevel > 100) {
-                throw new PokemonError("The power Level must be between 1 and 100 after update");
-            }
-
             await this.collection.updateOne(
                 { pokemonName: pokemonDoc.pokemonName },
                 {
                     $set: {
                         nickname: pokemonDoc.nickname,
                         favorite: pokemonDoc.favorite,
-                        powerLevel: newPowerLevel
+                        powerLevel: pokemonDoc.powerLevel
                     }
                 },
                 { upsert: true }
@@ -62,9 +54,18 @@ class MongoPokemonRepository extends PokemonRepository{
 
             
         }catch(err){
+            
             console.error(`[MongoPokemonRepository] Error to save Pokemon: ${err.message}`);
-            throw new PokemonRepositoryError(`Error to save Pokemon`);
+            throw new PokemonRepositoryError(`Error to save Pokemon: ${err.message}`);
         }
+    }
+
+    async findByName(pokemonName){
+
+        const existingPokemon = await this.collection.findOne({ pokemonName: pokemonName });
+
+        return existingPokemon;      
+        
     }
 
 }
