@@ -14,7 +14,24 @@ export const pokemonResolver ={
                 throw new Error(err.message); // Apollo vai mostrar o erro
             }
         }
-    }   
+    },
+    
+    
+    Query:{
+
+        pokemons: async(_,{input},{listPokemonsUc}) =>{
+
+            try{
+                //TODO DTO
+                return await listPokemonsUc.execute(input);
+            }catch(err){
+                console.error("[Resolver ListPokemons] Error to fetch pokemons:", err);
+                throw new Error(err.message); // Apollo vai mostrar o erro
+            }
+
+        }
+
+    }
 }
 
 
