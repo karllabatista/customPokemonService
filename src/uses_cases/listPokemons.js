@@ -50,7 +50,7 @@ class ListPokemonsUseCase{
                     // console.log(pokemonDB)
 
                     return {
-                        id: pokemonDB?._id.toString() || null, 
+                        id: detailedPokemon.id, 
                         name: detailedPokemon.name,         
                         height:detailedPokemon.height,       
                         weight: detailedPokemon.weight,       
