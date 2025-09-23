@@ -20,19 +20,19 @@ class ListPokemonsUseCase{
      * @throws {Error} - If the method will not implemented
      */
 
-    async listPokemons(page,limit){
+    async execute(page,limit){
 
-        if (!Number.isInteger(page) || page < 1){
+        // if (!Number.isInteger(page) || page < 1){
 
-            throw new Error("Page must be a positive number");
+        //     throw new Error("Page must be a positive number");
 
-        }
+        // }
 
-        if (!Number.isInteger(page) || page < 1){
+        // if (!Number.isInteger(page) || page < 1){
 
-            throw new Error("Limit must be a positive number");
+        //     throw new Error("Limit must be a positive number");
 
-        }
+        // }
 
         try{
             const pokemonsPaginatedData = await this.apiPokemon.paginatePokemons(page,limit);
