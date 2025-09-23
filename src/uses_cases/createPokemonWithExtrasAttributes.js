@@ -3,6 +3,7 @@ import { Pokemon } from "../domain/entities/Pokemon.js";
 import { PokemonApiPort } from "../domain/ports/api/PokemonApi.js";
 import { PokemonRepository } from "../domain/ports/repositories/PokemonRepository.js";
 import { PokemonError } from "../domain/errors/PokemonError.js";
+import { validatorPowerLevel } from "../domain/validators/PokemonValidator.js";
 class CreatePokemonWithExtrasAttributesUseCase{
 
 
@@ -55,11 +56,9 @@ class CreatePokemonWithExtrasAttributesUseCase{
 
                 newPowerLevel = customizedPokemon.powerLevel + existing.powerLevel;
 
-                //business rule power level
-                if (newPowerLevel < 1 || newPowerLevel >100){
-                    throw new PokemonError(" The power Level must be between 1 and 100")
-                }
-
+                //validate power level
+                validatorPowerLevel(newPowerLevel);
+              
                 customizedPokemon.powerLevel =  newPowerLevel;
             }
 
