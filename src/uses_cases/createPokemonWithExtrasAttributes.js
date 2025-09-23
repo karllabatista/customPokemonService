@@ -67,7 +67,7 @@ class CreatePokemonWithExtrasAttributesUseCase{
 
                 newPowerLevel = customizedPokemon.powerLevel + existing.powerLevel;
 
-                //business rule
+                //business rule power level
                 if (newPowerLevel < 1 || newPowerLevel >100){
                     throw new PokemonError(" The power Level must be between 1 and 100")
                 }
@@ -75,6 +75,25 @@ class CreatePokemonWithExtrasAttributesUseCase{
                 customizedPokemon.powerLevel =  newPowerLevel;
             }
 
+            // Só podem existir no máximo 3 Pokémons marcados como favoritos no
+            // MongoDB.
+            // Se o usuário tentar adicionar um 4º favorito, a mutation deve retornar erro.
+
+            //passou da regra 1
+            // vamos para regra 2
+            // do favorite
+            // vai no banco e conta total de favorite com true
+            // se o total de favorite > 3
+            //nao manda o pokemon c para o save
+
+            let totalPokemonsFavorites = await this.repositoryPokemon.countFavorites();
+            //console.log("favorite type:", typeof customizedPokemon.favorite, customizedPokemon.favorite);
+
+            // //business rule  favorite >3
+            if (totalPokemonsFavorites >= 3){
+
+                throw new PokemonError("Already exists three pokemons marked as favorite. Impossible save");
+            }
                     
             //save this pokemon
             const pokemonDB = await this.repositoryPokemon.save(customizedPokemon);
@@ -91,7 +110,7 @@ class CreatePokemonWithExtrasAttributesUseCase{
                 powerLevel: pokemonDB.powerLevel,    
                 id: pokemonDB._id.toString()         
             };
-            //console.log(enrichedPokemon);
+         
             return enrichedPokemon
         } catch (error){
 
@@ -107,7 +126,6 @@ class CreatePokemonWithExtrasAttributesUseCase{
            
         }                        
     
-
     }
 }
 
