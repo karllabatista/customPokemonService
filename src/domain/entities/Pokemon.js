@@ -3,7 +3,7 @@ class Pokemon{
 
     constructor(pokemonName,nickname,favorite,powerLevel){
 
-        if (!pokemonName||!nickname||!favorite||!powerLevel){
+        if (!pokemonName||!nickname||powerLevel == null || typeof favorite !== "boolean"){
 
             throw new Error("Invalid attributes to Pokemon")
 
