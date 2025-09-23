@@ -5,7 +5,7 @@ import { pokemonResolver } from "./interfaces/graphql/resolvers/pokemonResolver.
 import { context } from "./interfaces/graphql/context.js";
 
 
-const server = new ApolloServer({ typeDefs, pokemonResolver });
+const server = new ApolloServer({ typeDefs,  resolvers: pokemonResolver  });
 
 const { url } = await startStandaloneServer(server, {
     context,
