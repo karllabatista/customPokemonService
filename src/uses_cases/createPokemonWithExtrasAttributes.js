@@ -30,16 +30,16 @@ class CreatePokemonWithExtrasAttributesUseCase{
 
 
         try{
-        
+            
             // find data about pokemon in PokeAPI
             const pokemonDataApi = await this.apiPokemon.fetchPokemonByName(inputDTO.pokemonName);
 
-            //bussiness rule btw 1 and 100
-            if (inputDTO.powerLevel <1 || inputDTO.powerLevel > 100){
+            //bussiness rule btw 1 and 100 - first  checked
+            // if (inputDTO.powerLevel <1 || inputDTO.powerLevel > 100){
 
-                throw new PokemonError(" The power Level must be between 1 and 100")
+            //     throw new PokemonError(" The power Level must be between 1 and 100")
 
-            }
+            // }
 
         
             //create a customizedPokemon
@@ -49,7 +49,33 @@ class CreatePokemonWithExtrasAttributesUseCase{
                                             inputDTO.powerLevel        
                                 );
 
-                                
+            
+            //find if pokemons exists and  check details
+
+            //check pokemon power level
+            const existing = await this.repositoryPokemon.findByName(customizedPokemon.pokemonName);
+
+            // se retorna algo entao pokemon exists
+            ///pega power level do banco e soma com novo power
+            ///aplica regra de negocio
+            ////se passar na regra 
+            ////manda pra funcao de save
+            ////nessa funcao resove como salva
+
+            let newPowerLevel = null;
+            if (existing){
+
+                newPowerLevel = customizedPokemon.powerLevel + existing.powerLevel;
+
+                //business rule
+                if (newPowerLevel < 1 || newPowerLevel >100){
+                    throw new PokemonError(" The power Level must be between 1 and 100")
+                }
+
+                customizedPokemon.powerLevel =  newPowerLevel;
+            }
+
+                    
             //save this pokemon
             const pokemonDB = await this.repositoryPokemon.save(customizedPokemon);
             
@@ -68,8 +94,17 @@ class CreatePokemonWithExtrasAttributesUseCase{
             //console.log(enrichedPokemon);
             return enrichedPokemon
         } catch (error){
-            console.error("[CreatePokemonWithExtrasAttributesUseCase] Failed  create a customized Pokemon");
-            throw error; // se quiser propagar o erro para cima
+
+            if (error instanceof PokemonError) {
+                // se for erro de regra de negócio, imprime e propaga direto
+                console.error(`[CreatePokemonWithExtrasAttributesUseCase] Pokemon business rule failed: ${error.message}`);
+                throw error;
+            }else{
+                console.error("[CreatePokemonWithExtrasAttributesUseCase] Failed  create a customized Pokemon");
+                throw error; // se quiser propagar o erro para cima
+            }
+
+           
         }                        
     
 
