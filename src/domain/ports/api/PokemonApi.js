@@ -13,9 +13,9 @@ class PokemonApiPort{
      * @throws {Error} - If the method will not implemented
      */
 
-    async listPokemons(page,limit){
+    async paginatePokemons(page,limit){
 
-       throw new Error("Method 'listPokemons' must be implemented.");
+       throw new Error("Method 'paginatePokemons' must be implemented.");
     }
 
 
