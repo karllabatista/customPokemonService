@@ -34,7 +34,7 @@ class MongoPokemonRepository extends PokemonRepository{
             };
 
            // await this.collection.insertOne(pokemonDoc);
-
+          
             await this.collection.updateOne(
                 { pokemonName: pokemonDoc.pokemonName },
                 {
@@ -66,6 +66,13 @@ class MongoPokemonRepository extends PokemonRepository{
 
         return existingPokemon;      
         
+    }
+
+    async countFavorites(){
+      
+        const total = await this.collection.countDocuments({ favorite: true });
+        return total;
+    
     }
 
 }
