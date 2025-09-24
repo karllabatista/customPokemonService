@@ -246,7 +246,14 @@ docker-compose run --rm app npm test
 
 **npm test**: command that runs the project's tests.
 ## Future Improvemets
-
+- Fixed failed unit tests
+- Increased test coverage
+- Added an API gateway so clients don't connect directly to the API
+- Added custom logging to have greater control over behavior within the app
+- Added caching for frequently performed queries
+- Added a resilience strategy (retry, circuit break, timeout) for the PokeApi and MongoDB APIs
+- Improved the implementation of layered architectures (clean architecture) by creating more DTOS and factories
+to avoid maximum coupling
 
 
 
