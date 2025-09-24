@@ -44,7 +44,7 @@ To build the solution of this challenge the following architecture was thought:
 
 ![Architecture Diagrama](imgs/arch.png)
 
-**Flow Execution:**
+**Execution Flow:**
 1. Client sends queries or mutations to the API.
 2. The API communicates with the Custom Pokemon Service.
 3. If the operation is to retrieve data from the PokeApi, access PokeApi and return data.
@@ -106,6 +106,84 @@ curl -X POST http://localhost:4000/ \
   -H "Content-Type: application/json" \
   -d '{"query":"query { pokemons(page:4, limit:10) { id name powerLevel favorite } }"}'
 ```
+expect output:
+```json
+
+    {                                                                                                                                                                       
+  "data": {                                                                                                                                                             
+    "pokemons": [                                                                                                                                                       
+      {                                                                                                                                                                 
+        "id": "1",                                                                                   
+        "name": "bulbasaur",                                                                                                                                            
+        "powerLevel": null,                                                                                                                                             
+        "favorite": false                                                                                                                                               
+      },                                                                                                                                                                
+      {                                                                                                                                                                 
+        "id": "2",                                                                                                                                                      
+        "name": "ivysaur",                                                                                                                                              
+        "powerLevel": null,                                                                                                                                             
+        "favorite": false                                                                                                                                               
+      },  
+      {...}, 
+      {
+        "id": "12",
+        "name": "butterfree",
+        "powerLevel": null,
+        "favorite": false
+      },
+      {
+        "id": "13",
+        "name": "weedle",
+        "powerLevel": null,
+        "favorite": false
+      },
+      {
+        "id": "14",
+        "name": "kakuna",
+        "powerLevel": null,
+        "favorite": false
+      },
+      {
+        "id": "15",
+        "name": "beedrill",
+        "powerLevel": null,
+        "favorite": false
+      },
+      {
+        "id": "16",
+        "name": "pidgey",
+        "powerLevel": null,
+        "favorite": false
+      },
+      {
+        "id": "17",
+        "name": "pidgeotto",
+        "powerLevel": null,
+        "favorite": false
+      },
+      {
+        "id": "18",
+        "name": "pidgeot",
+        "powerLevel": null,
+        "favorite": false
+      },
+      {
+        "id": "19",
+        "name": "rattata",
+        "powerLevel": null,
+        "favorite": false
+      },
+      {
+        "id": "20",
+        "name": "raticate",
+        "powerLevel": null,
+        "favorite": false
+      }
+    ]
+  }
+}
+
+```
 ### Send a mutation
 
 
@@ -134,6 +212,21 @@ Send via curl:
 curl -s -X POST http://localhost:4000/ \
   -H "Content-Type: application/json" \
   -d '{"query":"mutation { createPokemonAttributes(input: { pokemonName: \"cascoon\", nickname: \"cascaozinho\", favorite: false, powerLevel: 1 }) { id name nickname favorite powerLevel } }"}' 
+
+```
+expected output
+```json
+{
+  "data": {
+    "createPokemonAttributes": {
+      "id": "268",
+      "name": "cascoon",
+      "nickname": "cascaozao",
+      "favorite": false,
+      "powerLevel": 1
+    }
+  }
+}
 
 ```
 ## Future Improvemets
