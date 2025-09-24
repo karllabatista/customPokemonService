@@ -51,8 +51,21 @@ To build the solution of this challenge the following architecture was thought:
 4. If the operation is to save/change/search, access PokemonDB (in MongoDB).
 5. Always returns an enriched Pokemon to the client.
 
-## Instalation
+### Details about Schema GraphQL
 
+```bash
+type Pokemon {
+id: ID!
+name: String!
+height: Int
+weight: Int
+types: [String!]!
+# Atributos extras (MongoDB)
+nickname: String
+favorite: Boolean
+powerLevel: Int
+}
+```
 ## Build and Run 
 
 ### Build
@@ -72,10 +85,31 @@ docker-compose up
 This will start the GraphQL API along with MongoDB (configured in docker-compose.yml).
 
 
-### Accessing data via the API
+## Accessing data via the API
 
-### How to use?
+### Send a query
+```graphql
+query { 
+    pokemons(page:4, limit:10) { 
+        id 
+        name 
+        powerLevel 
+        favorite 
+    } 
+}
+```
+
+Send via curl:
+
 ```grapgql
+curl -X POST http://localhost:4000/ \
+  -H "Content-Type: application/json" \
+  -d '{"query":"query { pokemons(page:4, limit:10) { id name powerLevel favorite } }"}'
+```
+### Send a mutation
+
+
+```graphql
 mutation{
   
   createPokemonAttributes(input:{
@@ -94,21 +128,13 @@ mutation{
    
   }
 }
-
-query{
-  pokemons(page:4,limit:10){
-
-    id
-    name
-    powerLevel
-    favorite
-
-  }
-}
-
-curl -X POST http://localhost:4000/ \
+```
+Send via curl:
+```bash
+curl -s -X POST http://localhost:4000/ \
   -H "Content-Type: application/json" \
-  -d '{"query":"query { pokemons(page:4, limit:10) { id name powerLevel favorite } }"}'
+  -d '{"query":"mutation { createPokemonAttributes(input: { pokemonName: \"cascoon\", nickname: \"cascaozinho\", favorite: false, powerLevel: 1 }) { id name nickname favorite powerLevel } }"}' 
+
 ```
 ## Future Improvemets
 
