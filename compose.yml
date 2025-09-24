@@ -5,21 +5,30 @@ services:
     image: mongo:7.0
     container_name: mongo
     ports:
-      - "27018:27017"
+      - "27018:27017"   # host:container, evita conflito com Mongo local
     volumes:
       - mongo-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
 
   app:
     build: .
     container_name: custom-pokemon-service
     ports:
       - "4000:4000"
-    env_file:
-      - .env
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/pokemons
     depends_on:
-      - mongo
+      mongo:
+        condition: service_healthy
     volumes:
-      - .:/app  
+      - .:/app
+    working_dir: /app
+    command: node src/server.js
 
 volumes:
   mongo-data:
