@@ -6,24 +6,28 @@
 The Custom Pokemon Service is a service that creates a customized pokemon based in PokeAPI data with extras attributtes saved in database. This extras attributtes are: nickname, powerLevel and favorite. The pokemon result after this combination is a enriched pokemons wit following structure:
 
 ```bash
-id: ID!
-name: String!
-height: Int
-weight: Int
-types: [String!]!
-# Atributos extras (MongoDB)
-nickname: String
-favorite: Boolean
-powerLevel: Int
+id
+name
+height
+weight
+types
+nickname
+favorite
+powerLevel
 ```
+## Service Description
 
-## Goal
+This service is a Node.js application that provides a GraphQL interface for managing Pokémon information.
 
-Develop a GraphQL API in Node.js that:
-1. Integrates with [PokeAPI](https://pokeapi.co/).
-2. Allows for paginated Pokémon listings, enriched with additional attributes saved in MongoDB.
-3. Allows for registering and updating additional Pokémon attributes in MongoDB.
-4. Contains unit tests implemented with Jest.
+Main Features:
+1. **Pokémon List**:
+- Fetches official data from PokeAPI.
+- Returns paginated lists of Pokémon, which can include additional attributes saved in MongoDB.
+
+2. **Registering and Updating Additional Attributes**:
+- Allows you to add or update additional information about a Pokémon in MongoDB.
+- Respects business rules, such as a maximum of 3 favorite Pokémon and `powerLevel` values ​​between 1 and 100.
+
 
 ## Tecnical Requirements
 
@@ -33,12 +37,79 @@ Develop a GraphQL API in Node.js that:
 - Jest for testing
 - Integration with PokeAPI to retrieve official Pokémon data
 
-##
+
+## Archictecture
+
+To build the solution of this challenge the following architecture was thought:
+
+![Architecture Diagrama](imgs/arch.png)
+
+**Flow Execution:**
+1. Client sends queries or mutations to the API.
+2. The API communicates with the Custom Pokemon Service.
+3. If the operation is to retrieve data from the PokeApi, access PokeApi and return data.
+4. If the operation is to save/change/search, access PokemonDB (in MongoDB).
+5. Always returns an enriched Pokemon to the client.
 
 ## Instalation
 
-## How to run?
+## Build and Run 
 
+### Build
+
+To build the service's Docker image, run:
+```bash
+docker-compose build
+```
+
+### Running the service
+
+After building, start the service with:
+
+```bash
+docker-compose up
+```
+This will start the GraphQL API along with MongoDB (configured in docker-compose.yml).
+
+
+### Accessing data via the API
+
+### How to use?
+```grapgql
+mutation{
+  
+  createPokemonAttributes(input:{
+    pokemonName: "cascoon"
+    nickname: "cascaozinho"
+    favorite: false
+    powerLevel: 1
+
+  }){
+    
+    id
+    name
+    nickname
+    favorite
+    powerLevel
+   
+  }
+}
+
+query{
+  pokemons(page:4,limit:10){
+
+    id
+    name
+    powerLevel
+    favorite
+
+  }
+}
+
+curl -X POST http://localhost:4000/ \
+  -H "Content-Type: application/json" \
+  -d '{"query":"query { pokemons(page:4, limit:10) { id name powerLevel favorite } }"}'
+```
 ## Future Improvemets
 
 
