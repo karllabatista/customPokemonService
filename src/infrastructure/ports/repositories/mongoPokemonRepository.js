@@ -10,7 +10,7 @@ class MongoPokemonRepository extends PokemonRepository{
      * @param {string} collectionName - Collection name
      */
 
-    constructor(db,collectionName = "pokemons"){
+    constructor(db,collectionName = "pokemonAttributes"){
         super();
         this.collection = db.collection(collectionName);
         
