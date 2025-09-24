@@ -42,8 +42,11 @@ Main Features:
 
 To build the solution of this challenge the following architecture was thought:
 
-![Architecture Diagrama](imgs/arch.png)
+![Architecture Diagrama2](imgs/arch.png)
 
+### Layered Architecture
+Below is the diagram representing the organization of `custom-pokemon-service` following the principles of Clean Architecture:
+![Architecture Diagrama](imgs/service_structure.png)
 **Execution Flow:**
 1. Client sends queries or mutations to the API.
 2. The API communicates with the Custom Pokemon Service.
