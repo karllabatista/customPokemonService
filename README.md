@@ -232,6 +232,19 @@ expected output
 }
 
 ```
+
+## Run  tests
+Execute the following command to run tests:
+```bash
+docker-compose run --rm app npm test
+```
+**run** : creates a temporary container to run the command.
+
+**--rm**: automatically removes the container after execution.
+
+**app**: name of the service defined in docker-compose.yml.
+
+**npm test**: command that runs the project's tests.
 ## Future Improvemets
 
 
