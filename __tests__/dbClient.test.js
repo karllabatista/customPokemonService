@@ -1,4 +1,4 @@
-import { MongoDBClient } from "./dbClient";
+import { MongoDBClient } from "../src/infrastructure/db/dbClient";
 import dotenv from "dotenv";
 dotenv.config();
 

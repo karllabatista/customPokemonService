@@ -1,5 +1,5 @@
-import {PokemonApiHttpClient} from "./pokemonApiHttpClient.js";
-import { PokemonError } from "../../../domain/errors/PokemonError.js";
+import {PokemonApiHttpClient} from "../src/infrastructure/ports/api/pokemonApiHttpClient.js";
+import { PokemonError } from "../src/domain/errors/PokemonError.js";
 import { expect, jest } from '@jest/globals';
 describe("PokemonApiHttpClient",()=> {
 

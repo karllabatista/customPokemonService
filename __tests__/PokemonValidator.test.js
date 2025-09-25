@@ -1,5 +1,5 @@
-import { validatorPowerLevel, validatorFavoritePokemons } from "../validators/PokemonValidator.js";
-import { PokemonError } from "../errors/PokemonError.js";
+import { validatorPowerLevel, validatorFavoritePokemons } from "../src/domain/validators/PokemonValidator.js";
+import { PokemonError } from "../src/domain/errors/PokemonError.js";
 
 describe("validatorPowerLevel", () => {
   test("should not throw error when power level is within range", () => {
