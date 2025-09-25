@@ -17,7 +17,7 @@ class CreatePokemonWithExtrasAttributesUseCase{
 
         if (!(repositoryPokemon instanceof PokemonRepository)){
 
-            throw new Error(`${apiPokemon} is not instance of PokemonApiPort`);
+            throw new Error(`${repositoryPokemon} is not instance of RepositoryPort`);
 
         }
 
